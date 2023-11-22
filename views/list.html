@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简单列表</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* height: 100vh; */
+    }
+
+    .list-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 300px;
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 8px 15px;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #f9f9f9;
+    }
+
+    .list-item {
+      font-weight: bold;
+    }
+
+    p {
+      color: #666;
+    }
+
+    .details {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="list-container">
+    <ul id="configDisplay"></ul>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('JavaScript code is running!');
+      window.addEventListener('message', event => {
+        const message = event.data;
+        console.log('Received message:', message);
+        // 处理接收到的消息
+        switch (message.command) {
+          case 'updateConfig':
+            updateConfigDisplay(message.data);
+            break;
+        }
+      });
+    });
+    // 示例函数，用于更新配置数据的显示
+    function updateConfigDisplay(configData) {
+      // 在 HTML 页面中更新显示配置数据的逻辑
+      console.log('Received config data:', configData.length);
+      const configDisplayElement = document.getElementById('configDisplay');
+      let strHtml = '';
+      for (var i = 0; i < configData.length; i++) {
+        strHtml += `<li>
+            <p class="list-item">gtkware: ${configData[i].gtkware}</p>
+            <p class="list-item">5900: ${configData[i]['5900']}</p>
+            <p class="list-item">6080: ${configData[i]['6080']}</p>
+            <p class="details">详情: <a href="${configData[i].url}">${configData[i].url}</a></p>
+          </li>`;
+      }
+      configDisplayElement.innerHTML = strHtml;
+    }
+  </script>
+</body>
+
+</html>
