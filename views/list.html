@@ -61,8 +61,16 @@
     <ul id="configDisplay"></ul>
   </div>
   <script>
+    // 监听UI加载
     document.addEventListener('DOMContentLoaded', function () {
       console.log('JavaScript code is running!');
+      // UI加载完成,请求数据
+      const vscode = acquireVsCodeApi();
+      vscode.postMessage({
+        command: 'updateConfig',
+        data: "request data",
+      });
+      // 监听数据请求成功
       window.addEventListener('message', event => {
         const message = event.data;
         console.log('Received message:', message);
@@ -74,7 +82,8 @@
         }
       });
     });
-    // 示例函数，用于更新配置数据的显示
+
+    // 渲染函数，用于更新配置数据的显示
     function updateConfigDisplay(configData) {
       // 在 HTML 页面中更新显示配置数据的逻辑
       console.log('Received config data:', configData.length);

@@ -14,21 +14,21 @@
   "contributes": {
     "commands": [
       {
-        "command": "data-preview.helloWorld",
+        "command": "extension.showData",
         "title": "Hello World"
       }
     ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "myPlugin",
+          "id": "myPluginContainer",
           "title": "My Plugin",
           "icon": "static/icon.svg"
         }
       ]
     },
     "views": {
-      "myPlugin": [
+      "myPluginContainer": [
         {
           "id": "myPluginView",
           "name": "My Plugin View",
