@@ -97,7 +97,7 @@
             <p class="details">详情: <a href="${configData[i].url}">${configData[i].url}</a></p>
           </li>`;
       }
-      configDisplayElement.innerHTML = strHtml;
+      configDisplayElement.innerHTML = strHtml || '<li><p>没有找到数据，请确保当前项目下.vscode/my-data.json文件中有数据</p><li>';
     }
   </script>
 </body>
