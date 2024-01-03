@@ -3,63 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>简单列表</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      /* height: 100vh; */
-    }
-
-    .list-container {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 300px;
-      max-width: 100%;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      padding: 8px 15px;
-      border-bottom: 1px solid #eee;
-      transition: background-color 0.3s ease;
-    }
-
-    li:hover {
-      background-color: #f9f9f9;
-    }
-
-    .list-item {
-      font-weight: bold;
-    }
-
-    p {
-      color: #666;
-    }
-
-    .details {
-      margin-top: 8px;
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 fill=%22grey%22 font-size=%2290%22>🌊</text></svg>">
+  <title>VCDrom</title>
+  <link rel="preload" as="font" href="{{styleSrc}}" type="font/woff2" crossorigin>
+  <script src="{{scriptSrc}}"></script>
 </head>
 
 <body>
-  <div class="list-container">
-    <ul id="configDisplay"></ul>
-  </div>
+  <div id="waveformTest"></div>
   <script>
     // 监听UI加载
     document.addEventListener('DOMContentLoaded', function () {
@@ -67,7 +18,7 @@
       // UI加载完成,请求数据
       const vscode = acquireVsCodeApi();
       vscode.postMessage({
-        command: 'updateConfig',
+        command: 'loadData',
         data: "request data",
       });
       // 监听数据请求成功
@@ -76,29 +27,24 @@
         console.log('Received message:', message);
         // 处理接收到的消息
         switch (message.command) {
-          case 'updateConfig':
-            updateConfigDisplay(message.data);
+          case 'loadData':
+            // updateConfigDisplay(message.data);
+            console.log(message)
+            const content = document.getElementById('waveformTest').innerHTML
+            console.log(content)
+            if(!content){
+              VCDromExt('waveformTest', message.data.content, message.data.fileName)
+            }
             break;
         }
       });
     });
-
-    // 渲染函数，用于更新配置数据的显示
-    function updateConfigDisplay(configData) {
-      // 在 HTML 页面中更新显示配置数据的逻辑
-      console.log('Received config data:', configData.length);
-      const configDisplayElement = document.getElementById('configDisplay');
-      let strHtml = '';
-      for (var i = 0; i < configData.length; i++) {
-        strHtml += `<li>
-            <p class="list-item">gtkware: ${configData[i].gtkware}</p>
-            <p class="list-item">5900: ${configData[i]['5900']}</p>
-            <p class="list-item">6080: ${configData[i]['6080']}</p>
-            <p class="details">详情: <a href="${configData[i].url}">${configData[i].url}</a></p>
-          </li>`;
-      }
-      configDisplayElement.innerHTML = strHtml || '<li><p>没有找到数据，请确保当前项目下.vscode/my-data.json文件中有数据</p><li>';
-    }
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-67058225-1', 'auto');
+    ga('send', 'pageview');
   </script>
 </body>
 

@@ -1,0 +1,25 @@
+<!-- web/vcdPreview.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VCD Preview</title>
+</head>
+<body>
+  <pre id="vcdContent"></pre>
+  <script>
+    // 在这里通过 vscode API 获取 .vcd 文件内容并渲染到页面上
+    const vscode = acquireVsCodeApi();
+    
+    vscode.postMessage({ command: 'getVCDContent' });
+    
+    window.addEventListener('message', event => {
+      const vcdContent = event.data.vcdContent;
+      document.getElementById('vcdContent').innerText = vcdContent;
+    });
+  </script>
+</body>
+</html>
