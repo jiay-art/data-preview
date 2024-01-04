@@ -1,13 +1,8 @@
 import * as vscode from "vscode";
-import VCDPreviewProvider from "./vcdPreviewProvider";
+import { VcdPreviewEditorProvider } from "./vcdEditor";
 
 function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.push(
-    vscode.window.registerCustomEditorProvider(
-      "mywave.vcd",
-      new VCDPreviewProvider(context)
-    )
-  );
+  context.subscriptions.push(VcdPreviewEditorProvider.register(context));
 }
 
 export { activate };

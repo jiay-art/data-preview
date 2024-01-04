@@ -3,6 +3,9 @@ import * as fs from "fs/promises";
 import path from "path";
 
 class VCDPreviewProvider implements vscode.CustomTextEditorProvider {
+  static register(context: vscode.ExtensionContext): { dispose(): any; } {
+    throw new Error("Method not implemented.");
+  }
   private webviewContent: string = "";
 
   constructor(private context: vscode.ExtensionContext) {}
@@ -14,16 +17,6 @@ class VCDPreviewProvider implements vscode.CustomTextEditorProvider {
   ): Promise<void> {
     console.log("resolveCustomTextEditor", document);
     const content = document.getText();
-    // const webviewPanel = vscode.window.createWebviewPanel(
-    //   "vcd",
-    //   "vcd preview",
-    //   vscode.ViewColumn.One,
-    //   {
-    //     enableScripts: true, // 启用JS，默认禁用
-    //     retainContextWhenHidden: true, // webview被隐藏时保持状态，避免被重置
-    //     localResourceRoots: [vscode.Uri.file(this.context.extensionPath)],
-    //   }
-    // );
 
     webviewPanel.webview.options = {
       enableScripts: true,
