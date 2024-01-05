@@ -1,7 +1,9 @@
 {
-  "name": "data-preview",
-  "displayName": "data-preview",
-  "description": "datas list preview",
+  "name": "vcd-preview",
+  "displayName": "vcd-preview",
+  "description": "vcd wave data preview",
+  "icon": "media/wave.png",
+  "publisher": "vcd-preview", 
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"

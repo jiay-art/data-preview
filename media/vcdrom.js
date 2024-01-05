@@ -43523,7 +43523,6 @@ module.exports = {
 			return false;
 		}
 
-		// eslint-disable-next-line unicorn/no-for-loop
 		for (let i = 0; i < pathArray.length; i++) {
 			if (isObj(object)) {
 				if (!(pathArray[i] in object)) {
@@ -52294,8 +52293,6 @@ function fn5 (a, b, c, d, e, m, k, s) {
 module.exports = RIPEMD160
 
 },{"buffer":108,"hash-base":148,"inherits":178}],215:[function(require,module,exports){
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
-/* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
 
@@ -52362,7 +52359,6 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 },{"buffer":108}],216:[function(require,module,exports){
 (function (process){(function (){
-/* eslint-disable node/no-deprecated-api */
 
 'use strict'
 
